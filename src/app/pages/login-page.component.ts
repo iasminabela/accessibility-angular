@@ -1,0 +1,86 @@
+import { Component } from "@angular/core";
+import { FormsModule } from "@angular/forms";
+import { Router, RouterLink } from "@angular/router";
+import { AuthService } from "@/app/services/auth.service";
+import { ButtonComponent } from "@/app/components/ui/button.component";
+import { TextFieldComponent } from "@/app/components/ui/text-field.component";
+import { DEMO_CREDENTIALS } from "@/data/seedUsers";
+
+@Component({
+  selector: "app-login-page",
+  standalone: true,
+  imports: [FormsModule, RouterLink, ButtonComponent, TextFieldComponent],
+  template: `
+    <div class="flex min-h-screen items-center justify-center bg-slate-50 px-4">
+      <div
+        class="w-full max-w-sm rounded-xl border border-slate-200 bg-white p-8 shadow-sm"
+      >
+        <div class="mb-6 text-center">
+          <div class="text-2xl font-semibold text-brand-600">Eventer</div>
+          <div class="text-sm text-slate-400">Log in to your account</div>
+        </div>
+
+        @if (error) {
+          <div class="mb-4 rounded-md bg-red-50 px-3 py-2 text-sm text-red-600">
+            {{ error }}
+          </div>
+        }
+
+        <form (ngSubmit)="handleSubmit()" class="flex flex-col gap-4">
+          <app-text-field
+            label="Email"
+            type="email"
+            [(value)]="email"
+            placeholder="you@example.com"
+          />
+          <app-text-field
+            label="Password"
+            type="password"
+            [(value)]="password"
+            placeholder="••••••••"
+          />
+          <app-button type="submit" className="mt-2 w-full">
+            Log in
+          </app-button>
+        </form>
+
+        <div class="mt-6 rounded-md bg-slate-50 p-3 text-xs text-slate-500">
+          <div class="mb-1 font-medium text-slate-600">Demo accounts</div>
+          <div>Admin: {{ demo.admin.email }} / {{ demo.admin.password }}</div>
+          <div>User: {{ demo.user.email }} / {{ demo.user.password }}</div>
+        </div>
+
+        <div class="mt-4 text-center text-sm text-slate-500">
+          No account?
+          <a routerLink="/register" class="text-brand-600 hover:underline"
+            >Create one</a
+          >
+        </div>
+      </div>
+    </div>
+  `,
+})
+export class LoginPageComponent {
+  email = "";
+  password = "";
+  error = "";
+
+  readonly demo = DEMO_CREDENTIALS;
+
+  constructor(
+    private auth: AuthService,
+    private router: Router,
+  ) {}
+
+  handleSubmit(): void {
+    const result = this.auth.login({
+      email: this.email,
+      password: this.password,
+    });
+    if (result.ok) {
+      this.router.navigate(["/dashboard"]);
+    } else {
+      this.error = result.error ?? "Unable to log in.";
+    }
+  }
+}

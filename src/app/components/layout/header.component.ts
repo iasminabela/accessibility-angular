@@ -1,0 +1,103 @@
+import { Component } from "@angular/core";
+import { RouterLink } from "@angular/router";
+import { Router } from "@angular/router";
+import { AuthService } from "@/app/services/auth.service";
+
+@Component({
+  selector: "app-header",
+  standalone: true,
+  imports: [RouterLink],
+  template: `
+    <div class="border-b border-slate-200 bg-white">
+      <div
+        class="mx-auto flex max-w-6xl items-center justify-between px-4 py-3"
+      >
+        <a
+          routerLink="/dashboard"
+          class="flex items-center gap-2 text-brand-600"
+        >
+          <span class="text-2xl">◆</span>
+          <span class="text-lg font-semibold">Eventer</span>
+        </a>
+
+        <div class="flex items-center gap-5 text-sm">
+          @if (auth.isAuthenticated()) {
+            <a
+              routerLink="/dashboard"
+              class="text-slate-600 hover:text-brand-600"
+              >Dashboard</a
+            >
+            <a routerLink="/events" class="text-slate-600 hover:text-brand-600"
+              >Events</a
+            >
+          }
+          @if (auth.isAdmin()) {
+            <div
+              class="relative"
+              (mouseenter)="adminMenuOpen = true"
+              (mouseleave)="adminMenuOpen = false"
+            >
+              <span class="cursor-pointer text-slate-600 hover:text-brand-600"
+                >Admin</span
+              >
+              @if (adminMenuOpen) {
+                <div class="absolute right-0 top-full z-20 w-32 pt-2">
+                  <div
+                    class="overflow-hidden rounded-md border border-slate-200 bg-white shadow-lg"
+                  >
+                    <a
+                      routerLink="/admin/users"
+                      (click)="adminMenuOpen = false"
+                      class="block px-3 py-2 text-sm text-slate-600 hover:bg-brand-50 hover:text-brand-600"
+                      >Users</a
+                    >
+                    <a
+                      routerLink="/admin/events"
+                      (click)="adminMenuOpen = false"
+                      class="block px-3 py-2 text-sm text-slate-600 hover:bg-brand-50 hover:text-brand-600"
+                      >Events</a
+                    >
+                  </div>
+                </div>
+              }
+            </div>
+          }
+          @if (auth.isAuthenticated()) {
+            <div class="flex items-center gap-3">
+              <span class="text-slate-400">{{ auth.currentUser()?.name }}</span>
+              <button
+                type="button"
+                (click)="handleLogout()"
+                class="rounded bg-slate-100 px-3 py-1.5 text-slate-700 hover:bg-slate-200"
+              >
+                Log out
+              </button>
+            </div>
+          } @else {
+            <a routerLink="/login" class="text-slate-600 hover:text-brand-600"
+              >Log in</a
+            >
+            <a
+              routerLink="/register"
+              class="rounded bg-brand-500 px-3 py-1.5 text-white hover:bg-brand-600"
+              >Sign up</a
+            >
+          }
+        </div>
+      </div>
+    </div>
+  `,
+})
+export class HeaderComponent {
+  adminMenuOpen = false;
+
+  constructor(
+    public auth: AuthService,
+    private router: Router,
+  ) {}
+
+  handleLogout(): void {
+    this.auth.logout();
+    this.router.navigate(["/login"]);
+  }
+}

@@ -1,0 +1,52 @@
+import { Component, EventEmitter, Input, Output } from "@angular/core";
+
+@Component({
+  selector: "app-pagination",
+  standalone: true,
+  template: `
+    @if (pageCount > 1) {
+      <div class="flex items-center justify-center gap-2 py-4">
+        <button
+          type="button"
+          (click)="onPageChange.emit(page - 1)"
+          [disabled]="page === 1"
+          class="flex h-8 w-8 items-center justify-center rounded border border-slate-200 text-slate-600 disabled:text-slate-300"
+        >
+          ‹
+        </button>
+
+        @for (pageNumber of pages; track pageNumber) {
+          <button
+            type="button"
+            (click)="onPageChange.emit(pageNumber)"
+            [class]="
+              pageNumber === page
+                ? 'h-8 w-8 rounded text-sm bg-brand-500 text-white'
+                : 'h-8 w-8 rounded text-sm border border-slate-200 text-slate-600 hover:bg-slate-100'
+            "
+          >
+            {{ pageNumber }}
+          </button>
+        }
+
+        <button
+          type="button"
+          (click)="onPageChange.emit(page + 1)"
+          [disabled]="page === pageCount"
+          class="flex h-8 w-8 items-center justify-center rounded border border-slate-200 text-slate-600 disabled:text-slate-300"
+        >
+          ›
+        </button>
+      </div>
+    }
+  `,
+})
+export class PaginationComponent {
+  @Input() page = 1;
+  @Input() pageCount = 1;
+  @Output() onPageChange = new EventEmitter<number>();
+
+  get pages(): number[] {
+    return Array.from({ length: this.pageCount }, (_, index) => index + 1);
+  }
+}

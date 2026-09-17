@@ -8,10 +8,10 @@ workshop. It is intentionally built with **many natural accessibility issues** f
 
 ## Tech stack
 
-- React + TypeScript + Vite
+- Angular + TypeScript (standalone components)
 - Tailwind CSS
-- React Router
-- Vitest + React Testing Library
+- Angular Router
+- Jest + jest-axe (accessibility-friendly unit/component testing)
 
 ## Getting started
 
@@ -23,10 +23,9 @@ npm run dev
 Other scripts:
 
 ```bash
-npm run build       # typecheck + production build
-npm run test        # run unit/component tests
+npm run build       # production build (ng build)
+npm run test        # run unit/component tests (jest)
 npm run test:watch  # watch mode
-npm run lint        # eslint
 ```
 
 ## Demo accounts
@@ -59,9 +58,10 @@ workshop runs.
 The app is a static SPA. On Netlify/Vercel:
 
 - Build command: `npm run build`
-- Publish directory: `dist`
+- Publish directory: `dist/accessible-events/browser`
 - Add an SPA fallback so client routes resolve, e.g. a `public/_redirects` file
-  containing `/* /index.html 200` (Netlify).
+  containing `/* /index.html 200` (Netlify). Files in `public/` are copied to the
+  build output root.
 
 ## QA bug-log template
 

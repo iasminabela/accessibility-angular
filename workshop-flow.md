@@ -12,7 +12,7 @@
 
 1. **Intro (5 min):** what accessibility is, the workshop goal, how the day runs.
 2. **App demo (5 min):** quick tour of all pages and main features.
-3. **Code demo (10 min):** structure, libraries (React / TS / Tailwind / React Router), tools, where things live; take questions.
+3. **Code demo (10 min):** structure, libraries (Angular / TS / Tailwind / Angular Router), tools, where things live; take questions.
 4. **Gabi's tool demo (5 min):** what it is, live demo, why it's useful.
 5. **Gabi's linter (brief):** what it is and what it does.
 
