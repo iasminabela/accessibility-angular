@@ -13,16 +13,7 @@ const VARIANT_CLASSES: Record<Variant, string> = {
 @Component({
   selector: "app-button",
   standalone: true,
-  template: `
-    <button
-      [type]="type"
-      [disabled]="disabled"
-      [class]="classes"
-      (click)="clicked.emit()"
-    >
-      <ng-content></ng-content>
-    </button>
-  `,
+  templateUrl: "./button.component.html",
 })
 export class ButtonComponent {
   @Input() variant: Variant = "primary";

@@ -19,65 +19,7 @@ import { formatCurrency, formatDateTime } from "@/lib/format";
   selector: "app-event-detail-page",
   standalone: true,
   imports: [ButtonComponent, BuyTicketModalComponent, NotFoundPageComponent],
-  template: `
-    @if (!event) {
-      <app-not-found-page />
-    } @else {
-      <div class="flex flex-col gap-6">
-        <span
-          (click)="goBack()"
-          class="cursor-pointer text-sm text-slate-400 hover:text-slate-600"
-        >
-          ‹ Back
-        </span>
-
-        <div
-          class="overflow-hidden rounded-xl border border-slate-200 bg-white"
-        >
-          <img [src]="event.image" class="h-64 w-full object-cover" />
-          <div class="flex flex-col gap-4 p-6">
-            <div class="text-2xl font-semibold text-slate-800">
-              {{ event.name }}
-            </div>
-            <div class="flex flex-wrap gap-6 text-sm text-slate-500">
-              <span>{{ event.location }}</span>
-              <span>{{ formatDateTime(event.startDateTime) }}</span>
-              <span>Ends {{ formatDateTime(event.endDateTime) }}</span>
-              <span>Up to {{ event.maxPeople }} people</span>
-            </div>
-            <p class="text-sm leading-relaxed text-slate-600">
-              {{ event.description }}
-            </p>
-
-            <div
-              class="flex items-center justify-between border-t border-slate-100 pt-4"
-            >
-              <span class="text-xl font-semibold text-brand-600">
-                {{ formatCurrency(event.price) }}
-              </span>
-              @if (registered) {
-                <span
-                  class="rounded-md bg-green-50 px-3 py-2 text-sm text-green-700"
-                >
-                  You are going
-                </span>
-              } @else {
-                <app-button (clicked)="openModal()">Buy ticket</app-button>
-              }
-            </div>
-          </div>
-        </div>
-
-        <app-buy-ticket-modal
-          [open]="modalOpen"
-          [event]="event"
-          [result]="result"
-          (close)="modalOpen = false"
-          (pay)="handlePay()"
-        />
-      </div>
-    }
-  `,
+  templateUrl: "./event-detail-page.component.html",
 })
 export class EventDetailPageComponent implements OnInit {
   event: EventItem | undefined;

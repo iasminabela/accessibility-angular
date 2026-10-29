@@ -8,24 +8,7 @@ import { FormsModule } from "@angular/forms";
   selector: "app-text-field",
   standalone: true,
   imports: [FormsModule],
-  template: `
-    <div class="flex flex-col gap-1">
-      <span class="text-sm font-medium text-slate-700">{{ label }}</span>
-      <input
-        [type]="type"
-        [attr.min]="min"
-        [placeholder]="placeholder"
-        [readOnly]="readOnly"
-        [disabled]="disabled"
-        [ngModel]="value"
-        (ngModelChange)="valueChange.emit($event)"
-        [class]="inputClasses"
-      />
-      @if (error) {
-        <span class="text-xs text-red-500">{{ error }}</span>
-      }
-    </div>
-  `,
+  templateUrl: "./text-field.component.html",
 })
 export class TextFieldComponent {
   @Input() label = "";

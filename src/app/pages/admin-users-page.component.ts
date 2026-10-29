@@ -31,45 +31,7 @@ const SORT_ACCESSORS: Record<UserSortKey, (user: User) => string> = {
     UsersTableComponent,
     EditUserModalComponent,
   ],
-  template: `
-    <div class="flex flex-col gap-6">
-      <div class="flex items-center justify-between">
-        <div>
-          <div class="text-2xl font-semibold text-slate-800">Admin — users</div>
-          <div class="text-sm text-slate-400">{{ rangeLabel }} users</div>
-        </div>
-        @if (selectionCount > 0) {
-          <app-button variant="danger" (clicked)="handleDelete()">
-            Delete account{{ selectionCount > 1 ? "s" : "" }} ({{
-              selectionCount
-            }})
-          </app-button>
-        }
-      </div>
-
-      <div class="overflow-hidden rounded-lg border border-slate-200 bg-white">
-        <app-users-table
-          [users]="paginator.pageItems"
-          [selectedIds]="selectedIds"
-          [sort]="sortable.sort"
-          (toggleSelect)="toggleSelect($event)"
-          (toggleSort)="toggleSort($event)"
-          (edit)="editing = $event"
-        />
-        <app-pagination
-          [page]="paginator.page"
-          [pageCount]="paginator.pageCount"
-          (onPageChange)="paginator.goToPage($event)"
-        />
-      </div>
-
-      <app-edit-user-modal
-        [user]="editing"
-        (close)="editing = null"
-        (save)="handleSave($event)"
-      />
-    </div>
-  `,
+  templateUrl: "./admin-users-page.component.html",
 })
 export class AdminUsersPageComponent implements OnInit {
   readonly sortable = new SortableData<User, UserSortKey>(

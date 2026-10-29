@@ -8,14 +8,7 @@ import { SessionTimeoutModalComponent } from "./session-timeout-modal.component"
   selector: "app-session-timeout-manager",
   standalone: true,
   imports: [SessionTimeoutModalComponent],
-  template: `
-    <app-session-timeout-modal
-      [open]="showWarning"
-      [secondsLeft]="secondsLeft"
-      (stay)="stayLoggedIn()"
-      (logoutNow)="handleExpire()"
-    />
-  `,
+  templateUrl: "./session-timeout-manager.component.html",
 })
 export class SessionTimeoutManagerComponent implements OnInit, OnDestroy {
   showWarning = false;

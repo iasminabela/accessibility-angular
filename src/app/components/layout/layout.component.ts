@@ -15,16 +15,6 @@ import { SessionTimeoutManagerComponent } from "@/app/features/session/session-t
     ChatbotWidgetComponent,
     SessionTimeoutManagerComponent,
   ],
-  template: `
-    <div class="flex min-h-screen flex-col">
-      <app-header />
-      <div class="mx-auto w-full max-w-6xl flex-1 px-4 py-8">
-        <router-outlet></router-outlet>
-      </div>
-      <app-footer />
-      <app-chatbot-widget />
-      <app-session-timeout-manager />
-    </div>
-  `,
+  templateUrl: "./layout.component.html",
 })
 export class LayoutComponent {}

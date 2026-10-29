@@ -1,0 +1,6 @@
+<app-session-timeout-modal
+  [open]="showWarning"
+  [secondsLeft]="secondsLeft"
+  (stay)="stayLoggedIn()"
+  (logoutNow)="handleExpire()"
+/>

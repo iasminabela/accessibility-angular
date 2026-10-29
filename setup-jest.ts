@@ -1,8 +1,3 @@
-import { setupZoneTestEnv } from "jest-preset-angular/setup-env/zone";
-import "jest-axe/extend-expect";
+import { setupZoneTestEnv } from 'jest-preset-angular/setup-env/zone';
 
 setupZoneTestEnv();
-
-afterEach(() => {
-  window.localStorage.clear();
-});

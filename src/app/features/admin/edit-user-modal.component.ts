@@ -31,53 +31,7 @@ const ROLE_OPTIONS: DropdownOption[] = USER_ROLES.map((role) => ({
     TextFieldComponent,
     DropdownComponent,
   ],
-  template: `
-    @if (user) {
-      <app-modal
-        [open]="true"
-        [title]="'Edit ' + user.name"
-        (close)="close.emit()"
-      >
-        <form (ngSubmit)="handleSubmit()" class="flex flex-col gap-4">
-          <app-text-field
-            label="Name"
-            [value]="name"
-            (valueChange)="onNameChange($event)"
-            [error]="error"
-          />
-
-          <app-text-field
-            label="Email"
-            [value]="user.email"
-            [readOnly]="true"
-            [disabled]="true"
-          />
-
-          <div class="flex flex-col gap-1">
-            <span class="text-sm font-medium text-slate-700">Role</span>
-            <app-dropdown
-              [options]="roleOptions"
-              [value]="role"
-              (valueChange)="role = $any($event)"
-            />
-          </div>
-
-          <div class="flex justify-end gap-2 pt-2">
-            <app-button
-              type="button"
-              variant="secondary"
-              (clicked)="close.emit()"
-            >
-              Cancel
-            </app-button>
-            <app-button type="submit" [disabled]="!isNameValid">
-              Save changes
-            </app-button>
-          </div>
-        </form>
-      </app-modal>
-    }
-  `,
+  templateUrl: "./edit-user-modal.component.html",
 })
 export class EditUserModalComponent implements OnChanges {
   @Input() user: User | null = null;

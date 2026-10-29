@@ -10,41 +10,7 @@ import { EventFiltersComponent } from "@/app/features/events/event-filters.compo
   selector: "app-events-page",
   standalone: true,
   imports: [EventCardComponent, EventFiltersComponent],
-  template: `
-    <div class="flex flex-col gap-6">
-      <div>
-        <div class="text-2xl font-semibold text-slate-800">Events</div>
-        <div class="text-sm text-slate-400">Find something to attend.</div>
-      </div>
-
-      <app-event-filters
-        [search]="search"
-        (onSearchChange)="search = $event"
-        [location]="location"
-        (onLocationChange)="location = $event"
-        [locations]="locations"
-      />
-
-      @if (filtered.length === 0) {
-        <div
-          class="rounded-lg border border-dashed border-slate-300 p-10 text-center text-sm text-slate-400"
-        >
-          No events match your filters.
-        </div>
-      } @else {
-        <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
-          @for (event of filtered; track event.id) {
-            <app-event-card
-              [event]="event"
-              [clickable]="true"
-              [badge]="registeredIds.includes(event.id) ? 'Going' : undefined"
-              (open)="openEvent($event)"
-            />
-          }
-        </div>
-      }
-    </div>
-  `,
+  templateUrl: "./events-page.component.html",
 })
 export class EventsPageComponent {
   private readonly events: EventItem[] = getEvents();

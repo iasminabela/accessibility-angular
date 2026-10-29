@@ -9,31 +9,7 @@ import { AddEventModalComponent } from "@/app/features/admin/add-event-modal.com
   selector: "app-admin-events-page",
   standalone: true,
   imports: [ButtonComponent, EventCardComponent, AddEventModalComponent],
-  template: `
-    <div class="flex flex-col gap-6">
-      <div class="flex items-center justify-between">
-        <div>
-          <div class="text-2xl font-semibold text-slate-800">All events</div>
-          <div class="text-sm text-slate-400">
-            {{ events.length }} events in the platform.
-          </div>
-        </div>
-        <app-button (clicked)="modalOpen = true">Add event</app-button>
-      </div>
-
-      <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
-        @for (event of events; track event.id) {
-          <app-event-card [event]="event" />
-        }
-      </div>
-
-      <app-add-event-modal
-        [open]="modalOpen"
-        (close)="modalOpen = false"
-        (create)="handleCreate($event)"
-      />
-    </div>
-  `,
+  templateUrl: "./admin-events-page.component.html",
 })
 export class AdminEventsPageComponent {
   events: EventItem[] = getEvents();

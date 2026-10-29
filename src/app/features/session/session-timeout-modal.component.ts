@@ -5,40 +5,7 @@ import { ModalComponent } from "@/app/components/ui/modal.component";
   selector: "app-session-timeout-modal",
   standalone: true,
   imports: [ModalComponent],
-  template: `
-    <app-modal [open]="open" title="Session expiring" (close)="stay.emit()">
-      <div class="flex flex-col gap-4">
-        <p class="text-slate-700">
-          You have been inactive. For your security, you will be automatically
-          signed out in:
-        </p>
-
-        <div class="text-center text-3xl font-bold text-red-600">
-          {{ secondsLeft }}s
-        </div>
-
-        <p class="text-sm text-slate-500">
-          Move your mouse or click below to stay signed in.
-        </p>
-
-        <div class="flex justify-end gap-2">
-          <span
-            (click)="logoutNow.emit()"
-            class="cursor-pointer px-4 py-2 text-sm text-slate-500 hover:text-slate-700"
-          >
-            Log out now
-          </span>
-
-          <span
-            (click)="stay.emit()"
-            class="cursor-pointer rounded-md bg-brand-500 px-4 py-2 text-sm font-medium text-white hover:bg-brand-600"
-          >
-            Stay signed in
-          </span>
-        </div>
-      </div>
-    </app-modal>
-  `,
+  templateUrl: "./session-timeout-modal.component.html",
 })
 export class SessionTimeoutModalComponent {
   @Input() open = false;

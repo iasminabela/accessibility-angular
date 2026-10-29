@@ -15,34 +15,7 @@ import { CarouselState } from "@/lib/carousel-state";
   selector: "app-carousel",
   standalone: true,
   imports: [NgTemplateOutlet],
-  template: `
-    <div class="flex items-center gap-3">
-      <div
-        (click)="state.canGoPrev ? state.prev() : null"
-        [class]="arrowClasses(state.canGoPrev)"
-      >
-        ‹
-      </div>
-
-      <div class="grid flex-1 grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
-        @for (item of state.visibleItems; track item) {
-          <div>
-            <ng-container
-              [ngTemplateOutlet]="itemTemplate"
-              [ngTemplateOutletContext]="{ $implicit: item }"
-            ></ng-container>
-          </div>
-        }
-      </div>
-
-      <div
-        (click)="state.canGoNext ? state.next() : null"
-        [class]="arrowClasses(state.canGoNext)"
-      >
-        ›
-      </div>
-    </div>
-  `,
+  templateUrl: "./carousel.component.html",
 })
 export class CarouselComponent<T> implements OnChanges {
   @Input() items: T[] = [];
