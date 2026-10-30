@@ -7,11 +7,13 @@
       <div class="text-sm text-slate-400">Log in to your account</div>
     </div>
 
-    @if (error) {
-      <div class="mb-4 rounded-md bg-red-50 px-3 py-2 text-sm text-red-600">
-        {{ error }}
-      </div>
-    }
+    <div role="alert" aria-live="assertive" aria-atomic="true">
+      @if (error) {
+        <div class="mb-4 rounded-md bg-red-50 px-3 py-2 text-sm text-red-600">
+          {{ error }}
+        </div>
+      }
+    </div>
 
     <form (ngSubmit)="handleSubmit()" class="flex flex-col gap-4">
       <app-text-field
@@ -35,10 +37,9 @@
       <div>User: {{ demo.user.email }} / {{ demo.user.password }}</div>
     </div>
 
-    <div class="mt-4 text-center text-sm text-slate-500">
-      No account?
+    <div class="mt-4 text-center text-sm">
       <a routerLink="/register" class="text-brand-600 hover:underline"
-        >Create one</a
+        >No account? Create one</a
       >
     </div>
   </div>
