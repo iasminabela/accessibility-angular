@@ -1,30 +1,39 @@
 <div class="flex flex-wrap items-end gap-4">
-  <div class="flex flex-col gap-1">
-    <span class="text-xs font-medium text-slate-500">Search</span>
+  <div class="flex w-full flex-col gap-1 sm:w-auto">
+    <label for="event-search" class="text-base font-medium text-slate-700"
+      >Search</label
+    >
     <input
+      id="event-search"
+      type="search"
       [value]="search"
       (input)="onSearchChange.emit($any($event.target).value)"
       placeholder="Search events"
-      class="w-64 rounded-md border border-slate-300 px-3 py-2 text-sm text-slate-800 placeholder:text-slate-400"
+      class="w-full rounded-md border border-slate-400 px-3 py-2 text-base text-slate-800 placeholder:text-slate-500 sm:w-64"
     />
   </div>
 
   <div class="flex flex-col gap-1">
-    <span class="text-xs font-medium text-slate-500">Location</span>
+    <span id="event-location-label" class="text-base font-medium text-slate-700"
+      >Location</span
+    >
     <app-dropdown
       [options]="locationOptions"
       [value]="location"
       (valueChange)="onLocationChange.emit($event)"
       placeholder="All locations"
+      labelledBy="event-location-label"
     />
   </div>
 
   @if (search || location) {
-    <span
+    <button
+      type="button"
       (click)="clear()"
-      class="cursor-pointer pb-2 text-sm text-slate-400 hover:text-slate-600"
+      aria-label="Clear filters"
+      class="mb-1 rounded px-2 py-1 text-base text-slate-600 hover:text-slate-800"
     >
       ✕
-    </span>
+    </button>
   }
 </div>

@@ -4,7 +4,7 @@
       type="button"
       (click)="onPageChange.emit(page - 1)"
       [disabled]="page === 1"
-      class="flex h-8 w-8 items-center justify-center rounded border border-slate-200 text-slate-600 disabled:text-slate-300"
+      class="flex h-8 w-8 items-center justify-center rounded border border-slate-400 text-slate-600 disabled:text-slate-400"
     >
       ‹
     </button>
@@ -16,7 +16,7 @@
         [class]="
           pageNumber === page
             ? 'h-8 w-8 rounded text-sm bg-brand-500 text-white'
-            : 'h-8 w-8 rounded text-sm border border-slate-200 text-slate-600 hover:bg-slate-100'
+            : 'h-8 w-8 rounded text-sm border border-slate-400 text-slate-600 hover:bg-slate-100'
         "
       >
         {{ pageNumber }}
@@ -27,7 +27,7 @@
       type="button"
       (click)="onPageChange.emit(page + 1)"
       [disabled]="page === pageCount"
-      class="flex h-8 w-8 items-center justify-center rounded border border-slate-200 text-slate-600 disabled:text-slate-300"
+      class="flex h-8 w-8 items-center justify-center rounded border border-slate-400 text-slate-600 disabled:text-slate-400"
     >
       ›
     </button>
