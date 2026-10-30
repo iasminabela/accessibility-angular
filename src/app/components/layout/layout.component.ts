@@ -17,4 +17,10 @@ import { SessionTimeoutManagerComponent } from "@/app/features/session/session-t
   ],
   templateUrl: "./layout.component.html",
 })
-export class LayoutComponent {}
+export class LayoutComponent {
+  /** Move focus to the page content without letting the router handle the fragment. */
+  focusMain(event: Event): void {
+    event.preventDefault();
+    document.getElementById("main-content")?.focus();
+  }
+}

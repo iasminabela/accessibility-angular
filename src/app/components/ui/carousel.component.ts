@@ -31,10 +31,10 @@ export class CarouselComponent<T> implements OnChanges {
 
   arrowClasses(enabled: boolean): string {
     const base =
-      "flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-slate-200 text-lg";
+      "flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-slate-400 text-lg";
     const state = enabled
-      ? "cursor-pointer text-slate-600 hover:bg-slate-100"
-      : "text-slate-300";
+      ? "cursor-pointer text-slate-700 hover:bg-slate-100"
+      : "cursor-not-allowed text-slate-400";
     return `${base} ${state}`;
   }
 }

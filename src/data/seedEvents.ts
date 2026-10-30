@@ -21,6 +21,8 @@ export function buildSeedEvents(): EventItem[] {
         "A full day of talks about the React ecosystem, from server components to fine-grained reactivity.",
       location: "Berlin, DE",
       image: img("react-summit"),
+
+      imageAlt: "Pine forest",
       startDateTime: "2026-09-14T09:00:00.000Z",
       endDateTime: "2026-09-14T17:00:00.000Z",
       price: 149,
@@ -34,6 +36,8 @@ export function buildSeedEvents(): EventItem[] {
         "How teams scale UI with tokens, components and documentation that people actually use.",
       location: "Amsterdam, NL",
       image: img("design-systems"),
+
+      imageAlt: "Aerial view of a road",
       startDateTime: "2026-09-20T10:00:00.000Z",
       endDateTime: "2026-09-20T16:00:00.000Z",
       price: 99,
@@ -47,6 +51,8 @@ export function buildSeedEvents(): EventItem[] {
         "Practical accessibility for engineers, designers and QA. Real audits, real fixes.",
       location: "London, UK",
       image: img("a11y-conf"),
+
+      imageAlt: "Snow-covered mountain peak",
       startDateTime: "2026-10-02T09:30:00.000Z",
       endDateTime: "2026-10-02T18:00:00.000Z",
       price: 0,
@@ -60,6 +66,8 @@ export function buildSeedEvents(): EventItem[] {
         "Backend patterns, streaming, and performance for modern Node.js applications.",
       location: "Lisbon, PT",
       image: img("node-congress"),
+
+      imageAlt: "Tall buildings covered in hanging plants",
       startDateTime: "2026-10-11T09:00:00.000Z",
       endDateTime: "2026-10-11T17:30:00.000Z",
       price: 129,
@@ -73,6 +81,8 @@ export function buildSeedEvents(): EventItem[] {
         "A hands-on workshop covering advanced types, inference and library authoring.",
       location: "Vienna, AT",
       image: img("ts-workshop"),
+
+      imageAlt: "Desk seen from above with a monitor, tablet, keyboard, mouse, glasses and a notebook",
       startDateTime: "2026-10-18T10:00:00.000Z",
       endDateTime: "2026-10-18T15:00:00.000Z",
       price: 199,
@@ -86,6 +96,8 @@ export function buildSeedEvents(): EventItem[] {
         "Modern layout, container queries and the joyful weird side of CSS.",
       location: "Barcelona, ES",
       image: img("css-carnival"),
+
+      imageAlt: "Rocky mountain with a snowy summit rising behind a calm lake",
       startDateTime: "2026-10-25T11:00:00.000Z",
       endDateTime: "2026-10-25T16:00:00.000Z",
       price: 79,
@@ -99,6 +111,8 @@ export function buildSeedEvents(): EventItem[] {
         "Edge functions, static rendering and the modern content pipeline.",
       location: "Paris, FR",
       image: img("jamstack"),
+
+      imageAlt: "Close-up of a turquoise ocean wave curling over",
       startDateTime: "2026-11-01T09:00:00.000Z",
       endDateTime: "2026-11-01T17:00:00.000Z",
       price: 119,
@@ -112,6 +126,8 @@ export function buildSeedEvents(): EventItem[] {
         "From unit to end-to-end: building confidence without slowing your team down.",
       location: "Copenhagen, DK",
       image: img("testing-days"),
+
+      imageAlt: "Woman with long hair standing in a golden field at sunset",
       startDateTime: "2026-11-08T09:30:00.000Z",
       endDateTime: "2026-11-08T16:30:00.000Z",
       price: 109,
@@ -125,6 +141,8 @@ export function buildSeedEvents(): EventItem[] {
         "Schema design, federation and performance for GraphQL at scale.",
       location: "Dublin, IE",
       image: img("graphql-galaxy"),
+
+      imageAlt: "Evergreen forest overlooking a blue sea with mountains on the horizon",
       startDateTime: "2026-11-15T10:00:00.000Z",
       endDateTime: "2026-11-15T17:00:00.000Z",
       price: 139,
@@ -138,6 +156,8 @@ export function buildSeedEvents(): EventItem[] {
         "Pipelines, observability and platform engineering that developers enjoy.",
       location: "Munich, DE",
       image: img("devops-world"),
+
+      imageAlt: "Busy city street at night lit by bright billboards and neon signs",
       startDateTime: "2026-11-22T09:00:00.000Z",
       endDateTime: "2026-11-22T18:00:00.000Z",
       price: 159,
@@ -151,6 +171,8 @@ export function buildSeedEvents(): EventItem[] {
         "Offline-first apps, installability and the modern web platform.",
       location: "Prague, CZ",
       image: img("pwa-forum"),
+
+      imageAlt: "Long bridge stretching across calm water under a purple sky",
       startDateTime: "2026-11-29T10:00:00.000Z",
       endDateTime: "2026-11-29T15:30:00.000Z",
       price: 89,
@@ -164,6 +186,8 @@ export function buildSeedEvents(): EventItem[] {
         "Pragmatic AI features in the browser without shipping the whole model.",
       location: "Stockholm, SE",
       image: img("ai-frontend"),
+
+      imageAlt: "Person leaning on a railing, silhouetted against the setting sun",
       startDateTime: "2026-12-06T09:00:00.000Z",
       endDateTime: "2026-12-06T17:00:00.000Z",
       price: 149,
@@ -177,6 +201,8 @@ export function buildSeedEvents(): EventItem[] {
         "Core Web Vitals, rendering strategy and shipping fast experiences.",
       location: "Zurich, CH",
       image: img("webperf"),
+
+      imageAlt: "Open photo book and a black notebook on a wooden table next to dried grass",
       startDateTime: "2026-12-13T09:30:00.000Z",
       endDateTime: "2026-12-13T16:00:00.000Z",
       price: 129,
@@ -190,6 +216,8 @@ export function buildSeedEvents(): EventItem[] {
         "Ship small, learn fast: a friendly evening of demos and lessons learned.",
       location: "Rotterdam, NL",
       image: img("indie-hackers"),
+
+      imageAlt: "Vintage motel sign on a tall pole against a blue sky",
       startDateTime: "2026-12-19T18:00:00.000Z",
       endDateTime: "2026-12-19T21:00:00.000Z",
       price: 25,

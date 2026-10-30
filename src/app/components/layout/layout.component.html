@@ -1,8 +1,18 @@
 <div class="flex min-h-screen flex-col">
+  <a
+    href="#main-content"
+    (click)="focusMain($event)"
+    class="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:rounded focus:bg-white focus:px-4 focus:py-2 focus:text-brand-600 focus:shadow"
+    >Skip to main content</a
+  >
   <app-header />
-  <div class="mx-auto w-full max-w-6xl flex-1 px-4 py-8">
+  <main
+    id="main-content"
+    tabindex="-1"
+    class="mx-auto w-full max-w-6xl flex-1 px-4 py-8 focus:outline-none"
+  >
     <router-outlet></router-outlet>
-  </div>
+  </main>
   <app-footer />
   <app-chatbot-widget />
   <app-session-timeout-manager />

@@ -1,10 +1,13 @@
 <div class="flex items-center gap-3">
-  <div
-    (click)="state.canGoPrev ? state.prev() : null"
+  <button
+    type="button"
+    (click)="state.prev()"
+    [disabled]="!state.canGoPrev"
+    aria-label="Previous events"
     [class]="arrowClasses(state.canGoPrev)"
   >
     ‹
-  </div>
+  </button>
 
   <div class="grid flex-1 grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
     @for (item of state.visibleItems; track item) {
@@ -17,10 +20,13 @@
     }
   </div>
 
-  <div
-    (click)="state.canGoNext ? state.next() : null"
+  <button
+    type="button"
+    (click)="state.next()"
+    [disabled]="!state.canGoNext"
+    aria-label="Next events"
     [class]="arrowClasses(state.canGoNext)"
   >
     ›
-  </div>
+  </button>
 </div>

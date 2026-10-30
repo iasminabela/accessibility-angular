@@ -17,6 +17,14 @@ export class HeaderComponent {
     private router: Router,
   ) {}
 
+  /** Close the admin menu once keyboard focus leaves it. */
+  onAdminFocusOut(event: FocusEvent): void {
+    const container = event.currentTarget as HTMLElement;
+    if (!container.contains(event.relatedTarget as Node | null)) {
+      this.adminMenuOpen = false;
+    }
+  }
+
   handleLogout(): void {
     this.auth.logout();
     this.router.navigate(["/login"]);

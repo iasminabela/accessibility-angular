@@ -14,12 +14,23 @@
         (change)="handleImage($any($event.target).files)"
       />
       @if (form.image) {
-        <img [src]="form.image" class="mt-2 h-24 w-40 rounded object-cover" />
+        <img
+          [src]="form.image"
+          [alt]="form.imageAlt ?? ''"
+          class="mt-2 h-24 w-40 rounded object-cover"
+        />
       }
       @if (errors.image) {
         <span class="text-xs text-red-500">{{ errors.image }}</span>
       }
     </div>
+
+    <app-text-field
+      label="Image description"
+      [value]="form.imageAlt ?? ''"
+      (valueChange)="form.imageAlt = $event"
+      placeholder="e.g. A field with flowers at sunset"
+    />
 
     <div class="grid grid-cols-2 gap-4">
       <div class="flex flex-col gap-1">

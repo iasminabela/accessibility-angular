@@ -1,29 +1,45 @@
-<div (click)="clickable ? open.emit(event.id) : null" [class]="cardClasses">
+<div [class]="cardClasses">
   @if (dismissable) {
     <button
       type="button"
       (click)="dismiss.emit(event.id)"
+      [attr.aria-label]="'Remove ' + event.name"
       class="absolute right-2 top-2 z-10 flex h-6 w-6 items-center justify-center rounded-full bg-slate-900/60 text-white hover:bg-slate-900/80"
     >
       ×
     </button>
   }
   <div class="relative">
-    <img [src]="event.image" class="h-36 w-full object-cover" />
+    <img
+      [src]="event.image"
+      [alt]="event.imageAlt ?? ''"
+      class="h-36 w-full object-cover"
+    />
     @if (badge) {
       <span
-        class="absolute left-2 top-2 rounded bg-brand-500 px-2 py-0.5 text-xs font-medium text-white"
+        class="pointer-events-none absolute left-2 top-2 rounded bg-brand-500 px-2 py-0.5 text-xs font-medium text-white"
       >
         {{ badge }}
       </span>
     }
   </div>
   <div class="flex flex-1 flex-col gap-2 p-4">
-    <div class="text-base font-semibold text-slate-800">
-      {{ event.name }}
-    </div>
-    <div class="text-xs text-slate-400">{{ event.location }}</div>
-    <div class="text-xs text-slate-500">
+    @if (clickable) {
+      <!-- The ::after overlay stretches this button over the whole card, so it stays clickable everywhere. -->
+      <button
+        type="button"
+        (click)="open.emit(event.id)"
+        class="text-left text-base font-semibold text-slate-800 after:absolute after:inset-0 after:content-['']"
+      >
+        {{ event.name }}
+      </button>
+    } @else {
+      <div class="text-base font-semibold text-slate-800">
+        {{ event.name }}
+      </div>
+    }
+    <div class="text-xs text-slate-600">{{ event.location }}</div>
+    <div class="text-xs text-slate-600">
       {{ formatDate(event.startDateTime) }}
     </div>
     <div class="mt-auto pt-2 text-sm font-medium text-brand-600">
