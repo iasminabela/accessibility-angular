@@ -26,4 +26,11 @@ export class UsersTableComponent {
     }
     return this.sort.direction === "asc" ? " ▲" : " ▼";
   }
+
+  ariaSort(key: UserSortKey): "ascending" | "descending" | null {
+    if (this.sort?.key !== key) {
+      return null;
+    }
+    return this.sort.direction === "asc" ? "ascending" : "descending";
+  }
 }

@@ -9,7 +9,13 @@
   </div>
 
   <section class="flex flex-col gap-4">
-    <div class="text-lg font-semibold text-slate-800">My events</div>
+    <div
+      #myEventsHeading
+      tabindex="-1"
+      class="text-lg font-semibold text-slate-800 focus:outline-none"
+    >
+      My events
+    </div>
     @if (myEvents.length === 0) {
       <div
         class="rounded-lg border border-dashed border-slate-300 p-8 text-center text-sm text-slate-600"
@@ -25,7 +31,7 @@
             [dismissable]="true"
             badge="Going"
             (open)="openEvent($event)"
-            (dismiss)="unregister($event)"
+            (dismiss)="confirmUnregister($event)"
           />
         }
       </div>
@@ -49,3 +55,40 @@
     </app-carousel>
   </section>
 </div>
+
+<!-- Native <dialog> + showModal() gives us a focus trap, Escape to close and aria-modal for free. -->
+<dialog
+  #confirmDialog
+  aria-labelledby="confirm-remove-title"
+  aria-describedby="confirm-remove-description"
+  (close)="onConfirmDialogClose()"
+  (keydown.tab)="trapFocus($event)"
+  (keydown.shift.tab)="trapFocus($event)"
+  class="m-auto w-full max-w-md rounded-lg bg-white p-0 shadow-xl backdrop:bg-black/40"
+>
+  <div class="flex flex-col gap-4 p-5">
+    <h2 id="confirm-remove-title" class="text-lg font-semibold text-slate-800">
+      Remove event?
+    </h2>
+    <p id="confirm-remove-description" class="text-sm text-slate-600">
+      Are you sure you want to remove
+      <strong>{{ pendingEvent?.name }}</strong> from your events?
+    </p>
+    <div class="flex justify-end gap-2">
+      <button
+        type="button"
+        (click)="confirmDialog.close()"
+        class="rounded-md border border-slate-300 px-4 py-2 text-sm font-medium text-slate-700 hover:bg-slate-50"
+      >
+        Cancel
+      </button>
+      <button
+        type="button"
+        (click)="confirmDialog.close('confirm')"
+        class="rounded-md bg-red-600 px-4 py-2 text-sm font-medium text-white hover:bg-red-700"
+      >
+        Remove
+      </button>
+    </div>
+  </div>
+</dialog>

@@ -3,14 +3,27 @@
     <label for="event-search" class="text-base font-medium text-slate-700"
       >Search</label
     >
-    <input
-      id="event-search"
-      type="search"
-      [value]="search"
-      (input)="onSearchChange.emit($any($event.target).value)"
-      placeholder="Search events"
-      class="w-full rounded-md border border-slate-400 px-3 py-2 text-base text-slate-800 placeholder:text-slate-500 sm:w-64"
-    />
+    <div class="relative w-full sm:w-64">
+      <input
+        #searchInput
+        id="event-search"
+        type="search"
+        [value]="search"
+        (input)="onSearchChange.emit($any($event.target).value)"
+        placeholder="Search events"
+        class="w-full rounded-md border border-slate-400 py-2 pl-3 pr-9 text-base text-slate-800 placeholder:text-slate-500"
+      />
+      @if (search) {
+        <button
+          type="button"
+          (click)="clearSearch(searchInput)"
+          aria-label="Clear search"
+          class="absolute right-1 top-1/2 flex h-7 w-7 -translate-y-1/2 items-center justify-center rounded text-slate-500 hover:bg-slate-100 hover:text-slate-800"
+        >
+          <span aria-hidden="true">✕</span>
+        </button>
+      }
+    </div>
   </div>
 
   <div class="flex flex-col gap-1">

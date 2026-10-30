@@ -1,36 +1,43 @@
 <table class="w-full border-collapse text-sm">
   <thead>
     <tr class="border-b border-slate-200 text-left text-slate-500">
-      <th class="w-10 px-3 py-2"></th>
-      <th class="px-3 py-2">
-        <span
+      <th class="w-10 px-3 py-2"><span class="sr-only">Select</span></th>
+      <th class="px-3 py-2" [attr.aria-sort]="ariaSort('name')">
+        <button
+          type="button"
           (click)="toggleSort.emit('name')"
-          class="cursor-pointer font-medium hover:text-slate-700"
+          class="font-medium hover:text-slate-700"
         >
-          Name{{ sortIndicator("name") }}
-        </span>
+          Name<span aria-hidden="true">{{ sortIndicator("name") }}</span>
+        </button>
       </th>
       <th class="px-3 py-2 font-medium">Email</th>
       <th class="px-3 py-2 font-medium">Role</th>
-      <th class="px-3 py-2">
-        <span
+      <th class="px-3 py-2" [attr.aria-sort]="ariaSort('registeredAt')">
+        <button
+          type="button"
           (click)="toggleSort.emit('registeredAt')"
-          class="cursor-pointer font-medium hover:text-slate-700"
+          class="font-medium hover:text-slate-700"
         >
-          Registered{{ sortIndicator("registeredAt") }}
-        </span>
+          Registered<span aria-hidden="true">{{
+            sortIndicator("registeredAt")
+          }}</span>
+        </button>
       </th>
-      <th class="w-12 px-3 py-2"></th>
+      <th class="w-12 px-3 py-2"><span class="sr-only">Actions</span></th>
     </tr>
   </thead>
   <tbody>
     @for (user of users; track user.id) {
       <tr class="border-b border-slate-100 hover:bg-slate-50">
         <td class="px-3 py-2">
+          <!-- Space toggles a checkbox natively; Enter is added so it works the same way. -->
           <input
             type="checkbox"
             [checked]="selectedIds.has(user.id)"
             (change)="toggleSelect.emit(user.id)"
+            (keydown.enter)="$event.preventDefault(); toggleSelect.emit(user.id)"
+            [attr.aria-label]="'Select ' + user.name"
           />
         </td>
         <td class="px-3 py-2 font-medium text-slate-800">
@@ -42,12 +49,14 @@
           {{ formatDate(user.registeredAt) }}
         </td>
         <td class="px-3 py-2">
-          <span
+          <button
+            type="button"
             (click)="edit.emit(user)"
-            class="cursor-pointer text-slate-400 hover:text-brand-600"
+            [attr.aria-label]="'Edit ' + user.name"
+            class="text-slate-400 hover:text-brand-600"
           >
-            ✎
-          </span>
+            <span aria-hidden="true">✎</span>
+          </button>
         </td>
       </tr>
     }

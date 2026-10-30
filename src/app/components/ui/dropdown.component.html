@@ -1,13 +1,15 @@
 <div
   class="relative w-56"
   (focusout)="onFocusOut($event)"
-  (keydown.escape)="open = false"
+  (keydown.escape)="onEscape($event)"
 >
   <button
+    #trigger
     type="button"
     [id]="triggerId"
     (click)="toggle()"
-    aria-haspopup="true"
+    (keydown)="onTriggerKeydown($event)"
+    aria-haspopup="listbox"
     [attr.aria-expanded]="open"
     [attr.aria-controls]="listId"
     [attr.aria-labelledby]="labelledBy ? labelledBy + ' ' + triggerId : null"
@@ -20,17 +22,24 @@
   </button>
 
   @if (open) {
+    <!-- Arrow keys move between options; only the trigger is a Tab stop. -->
     <ul
       [id]="listId"
+      role="listbox"
+      [attr.aria-labelledby]="labelledBy ?? null"
+      (keydown)="onListKeydown($event)"
       class="absolute z-20 mt-1 w-full overflow-hidden rounded-md border border-slate-300 bg-white shadow-lg"
     >
-      @for (option of options; track option.value) {
-        <li>
+      @for (option of options; track option.value; let i = $index) {
+        <li role="presentation">
           <button
             type="button"
+            role="option"
+            tabindex="-1"
+            [id]="optionId(i)"
             (click)="select(option.value)"
-            [attr.aria-current]="option.value === value ? 'true' : null"
-            class="block w-full px-3 py-2 text-left text-base text-slate-800 hover:bg-brand-50"
+            [attr.aria-selected]="option.value === value"
+            class="block w-full px-3 py-2 text-left text-base text-slate-800 hover:bg-brand-50 focus:bg-brand-50"
           >
             {{ option.label }}
           </button>

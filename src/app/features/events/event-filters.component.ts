@@ -21,6 +21,12 @@ export class EventFiltersComponent {
     return this.locations.map((value) => ({ label: value, value }));
   }
 
+  /** Clears the text and puts focus back in the field, since the button disappears once it's empty. */
+  clearSearch(input: HTMLInputElement): void {
+    this.onSearchChange.emit("");
+    input.focus();
+  }
+
   clear(): void {
     this.onSearchChange.emit("");
     this.onLocationChange.emit("");

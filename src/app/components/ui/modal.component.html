@@ -1,25 +1,29 @@
-@if (open) {
+<!-- Native <dialog> + showModal() makes the page behind it inert and exposes aria-modal. -->
+<dialog
+  #dialog
+  [attr.aria-labelledby]="titleId"
+  (cancel)="$event.preventDefault()"
+  (keydown.escape)="onEscape($event)"
+  (keydown.tab)="trapFocus($event)"
+  (keydown.shift.tab)="trapFocus($event)"
+  class="m-auto w-full max-w-lg overflow-visible rounded-lg bg-white p-0 shadow-xl backdrop:bg-black/40"
+>
   <div
-    class="fixed inset-0 z-50 flex items-center justify-center bg-black/40 p-4"
+    class="flex items-center justify-between border-b border-slate-200 px-5 py-4"
   >
-    <div
-      class="w-full max-w-lg rounded-lg bg-white shadow-xl"
-      (click)="$event.stopPropagation()"
+    <h2 [id]="titleId" class="text-lg font-semibold text-slate-800">
+      {{ title }}
+    </h2>
+    <button
+      type="button"
+      (click)="close.emit()"
+      aria-label="Close"
+      class="text-xl leading-none text-slate-400 hover:text-slate-600"
     >
-      <div
-        class="flex items-center justify-between border-b border-slate-200 px-5 py-4"
-      >
-        <span class="text-lg font-semibold text-slate-800">{{ title }}</span>
-        <span
-          (click)="close.emit()"
-          class="cursor-pointer text-xl leading-none text-slate-400 hover:text-slate-600"
-        >
-          ×
-        </span>
-      </div>
-      <div class="px-5 py-4">
-        <ng-content></ng-content>
-      </div>
-    </div>
+      <span aria-hidden="true">×</span>
+    </button>
   </div>
-}
+  <div #body class="px-5 py-4">
+    <ng-content></ng-content>
+  </div>
+</dialog>
