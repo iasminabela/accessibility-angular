@@ -34,7 +34,11 @@
 
   <section class="flex flex-col gap-4">
     <div class="text-lg font-semibold text-slate-800">Upcoming events</div>
-    <app-carousel [items]="upcomingEvents" [perView]="4">
+    <app-carousel
+      [items]="upcomingEvents"
+      [perView]="4"
+      label="Upcoming events"
+    >
       <ng-template let-event>
         <app-event-card
           [event]="event"

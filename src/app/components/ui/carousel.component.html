@@ -1,4 +1,11 @@
-<div class="flex items-center gap-3">
+<div
+  role="region"
+  aria-roledescription="carousel"
+  [attr.aria-label]="label"
+  class="flex items-center gap-3"
+  (keydown.arrowleft)="onArrowKey($event, -1)"
+  (keydown.arrowright)="onArrowKey($event, 1)"
+>
   <button
     type="button"
     (click)="state.prev()"
@@ -11,7 +18,7 @@
 
   <div class="grid flex-1 grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
     @for (item of state.visibleItems; track item) {
-      <div>
+      <div data-carousel-slot>
         <ng-container
           [ngTemplateOutlet]="itemTemplate"
           [ngTemplateOutletContext]="{ $implicit: item }"
