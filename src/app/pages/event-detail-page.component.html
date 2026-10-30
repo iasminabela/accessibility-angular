@@ -2,12 +2,23 @@
   <app-not-found-page />
 } @else {
   <div class="flex flex-col gap-6">
-    <span
+    <button
+      type="button"
       (click)="goBack()"
-      class="cursor-pointer text-sm text-slate-400 hover:text-slate-600"
+      class="self-start text-sm text-slate-600 hover:text-slate-800"
     >
       ‹ Back
-    </span>
+    </button>
+
+    <div role="status" aria-live="polite" aria-atomic="true">
+      @if (announcement) {
+        <div
+          class="rounded-md bg-green-50 px-4 py-3 text-base font-medium text-green-800"
+        >
+          {{ announcement }}
+        </div>
+      }
+    </div>
 
     <div class="overflow-hidden rounded-xl border border-slate-200 bg-white">
       <img
@@ -19,7 +30,7 @@
         <div class="text-2xl font-semibold text-slate-800">
           {{ event.name }}
         </div>
-        <div class="flex flex-wrap gap-6 text-sm text-slate-500">
+        <div class="flex flex-wrap gap-6 text-sm text-slate-600">
           <span>{{ event.location }}</span>
           <span>{{ formatDateTime(event.startDateTime) }}</span>
           <span>Ends {{ formatDateTime(event.endDateTime) }}</span>

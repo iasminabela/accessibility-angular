@@ -3,28 +3,41 @@
   [title]="'Buy ticket — ' + event.name"
   (close)="close.emit()"
 >
-  @if (result) {
-    <div
-      [class]="
-        result.type === 'success'
-          ? 'mb-4 rounded-md px-3 py-2 text-sm bg-green-50 text-green-700'
-          : 'mb-4 rounded-md px-3 py-2 text-sm bg-red-50 text-red-600'
-      "
-    >
-      {{ result.text }}
-    </div>
-  }
+  <!-- Always rendered so screen readers pick up the payment result as soon as it appears. -->
+  <div role="alert" aria-atomic="true">
+    @if (result) {
+      <div
+        [class]="
+          result.type === 'success'
+            ? 'mb-4 rounded-md px-3 py-2 text-base font-medium bg-green-50 text-green-800'
+            : 'mb-4 rounded-md border border-red-300 px-3 py-2 text-base font-medium bg-red-50 text-red-700'
+        "
+      >
+        {{ result.text }}
+      </div>
+    }
+  </div>
 
   <form (ngSubmit)="handleSubmit()" class="flex flex-col gap-4">
     <div class="flex flex-col gap-1">
+      <label for="card-number" class="text-sm font-medium text-slate-700"
+        >Card number</label
+      >
       <input
+        id="card-number"
         [(ngModel)]="card"
         name="card"
-        placeholder="Card number"
-        class="rounded-md border border-slate-300 px-3 py-2 text-sm text-slate-800 placeholder:text-slate-400"
+        inputmode="numeric"
+        autocomplete="cc-number"
+        placeholder="1234 5678 9012 3456"
+        [attr.aria-invalid]="cardError ? 'true' : null"
+        [attr.aria-describedby]="cardError ? 'card-number-error' : null"
+        class="rounded-md border border-slate-400 px-3 py-2 text-sm text-slate-800 placeholder:text-slate-500"
       />
       @if (cardError) {
-        <span class="text-xs text-red-500">{{ cardError }}</span>
+        <span id="card-number-error" class="text-sm font-medium text-red-700">{{
+          cardError
+        }}</span>
       }
     </div>
 
@@ -37,25 +50,44 @@
 
     <div class="grid grid-cols-2 gap-4">
       <div class="flex flex-col gap-1">
+        <label for="card-expiry" class="text-sm font-medium text-slate-700"
+          >Expiry date</label
+        >
         <input
+          id="card-expiry"
           [(ngModel)]="expiry"
           name="expiry"
+          autocomplete="cc-exp"
           placeholder="MM/YY"
-          class="rounded-md border border-slate-300 px-3 py-2 text-sm text-slate-800 placeholder:text-slate-400"
+          [attr.aria-invalid]="expiryError ? 'true' : null"
+          [attr.aria-describedby]="expiryError ? 'card-expiry-error' : null"
+          class="rounded-md border border-slate-400 px-3 py-2 text-sm text-slate-800 placeholder:text-slate-500"
         />
         @if (expiryError) {
-          <span class="text-xs text-red-500">{{ expiryError }}</span>
+          <span id="card-expiry-error" class="text-sm font-medium text-red-700">{{
+            expiryError
+          }}</span>
         }
       </div>
       <div class="flex flex-col gap-1">
+        <label for="card-cvc" class="text-sm font-medium text-slate-700"
+          >CVC</label
+        >
         <input
+          id="card-cvc"
           [(ngModel)]="cvc"
           name="cvc"
-          placeholder="CVC"
-          class="rounded-md border border-slate-300 px-3 py-2 text-sm text-slate-800 placeholder:text-slate-400"
+          inputmode="numeric"
+          autocomplete="cc-csc"
+          placeholder="123"
+          [attr.aria-invalid]="cvcError ? 'true' : null"
+          [attr.aria-describedby]="cvcError ? 'card-cvc-error' : null"
+          class="rounded-md border border-slate-400 px-3 py-2 text-sm text-slate-800 placeholder:text-slate-500"
         />
         @if (cvcError) {
-          <span class="text-xs text-red-500">{{ cvcError }}</span>
+          <span id="card-cvc-error" class="text-sm font-medium text-red-700">{{
+            cvcError
+          }}</span>
         }
       </div>
     </div>
@@ -63,7 +95,7 @@
     <div
       class="flex items-center justify-between border-t border-slate-100 pt-4"
     >
-      <span class="text-sm text-slate-500">Total</span>
+      <span class="text-sm text-slate-600">Total</span>
       <span class="text-lg font-semibold text-slate-800">
         {{ formatCurrency(event.price) }}
       </span>

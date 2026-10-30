@@ -26,6 +26,8 @@ export class EventDetailPageComponent implements OnInit {
   registered = false;
   modalOpen = false;
   result: PaymentResult | null = null;
+  /** Read out politely by the page status region after a successful registration. */
+  announcement = "";
 
   readonly formatCurrency = formatCurrency;
   readonly formatDateTime = formatDateTime;
@@ -65,6 +67,7 @@ export class EventDetailPageComponent implements OnInit {
           type: "success",
           text: "Payment successful. See you there!",
         };
+        this.announcement = `Payment successful. You are registered for ${this.event.name}.`;
         this.modalOpen = false;
         break;
       case "error":
