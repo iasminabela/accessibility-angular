@@ -26,7 +26,11 @@ export class CarouselComponent<T> implements OnChanges {
   state = new CarouselState<T>([], this.perView);
 
   ngOnChanges(): void {
+    // Callers may pass a freshly built array on every change detection, so keep
+    // the current position instead of jumping back to the first page.
+    const startIndex = this.state.startIndex;
     this.state = new CarouselState<T>(this.items ?? [], this.perView);
+    this.state.startIndex = Math.min(startIndex, this.state.maxStart);
   }
 
   arrowClasses(enabled: boolean): string {
